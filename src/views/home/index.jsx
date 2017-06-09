@@ -3,6 +3,8 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as TodoActionCreators from 'actions/todo';
 import TodoList from 'components/todo-list';
+import MyArr from 'components/testing/myArr';
+import Layout from 'components/testing/layout';
 
 // TODO: make the create-todo form a component so that a bound action
 // can be provided rather than manually using this.props.dispatch(action)
@@ -65,6 +67,9 @@ export default class HomeView extends React.Component {
             <TodoList todos={todos} {...this._todoActions} />
             {this.renderNewTodoForm()}
           </div>
+          <Layout>
+            <MyArr arrMine={['tom', 'kris', 'jake', 'bullock']} />
+          </Layout>
         </div>
       </div>
     );
