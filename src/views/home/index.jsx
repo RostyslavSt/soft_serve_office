@@ -5,6 +5,7 @@ import * as TodoActionCreators from 'actions/todo';
 import TodoList from 'components/todo-list';
 import MyArr from 'components/testing/myArr';
 import Layout from 'components/testing/layout';
+import Butt from 'components/testing/button'
 
 // TODO: make the create-todo form a component so that a bound action
 // can be provided rather than manually using this.props.dispatch(action)
@@ -13,7 +14,8 @@ export default class HomeView extends React.Component {
   constructor () {
     super();
     this.state = {
-      todo : ''
+      todo : '',
+      users: ['tom', 'kris', 'jake', 'bullock']
     };
   }
 
@@ -66,10 +68,12 @@ export default class HomeView extends React.Component {
           <div className='col-md-8 col-md-offset-2'>
             <TodoList todos={todos} {...this._todoActions} />
             {this.renderNewTodoForm()}
+            <Layout>
+              <MyArr arrMine={this.state.users} />
+            </Layout>
+            <Butt list={this.state.users}></Butt>
           </div>
-          <Layout>
-            <MyArr arrMine={['tom', 'kris', 'jake', 'bullock']} />
-          </Layout>
+                  
         </div>
       </div>
     );
