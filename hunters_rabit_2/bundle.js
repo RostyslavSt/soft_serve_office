@@ -9785,8 +9785,9 @@ var HunterStore = function () {
             var _this = this;
 
             this.hareCoordinates = data;
+            console.log(data);
             return function (data) {
-                return console.log(_this.name + ' said: "I see the hare. Hare is on: {x: ' + data.x + ' y: ' + data.y + '}" + ' + data.x);
+                return console.log(_this.name + ' said: "I see the hare. Hare is on: {x: ' + data.x + ' y: ' + data.y + '}"');
             };
         }
     }]);
@@ -9836,7 +9837,7 @@ var store = function () {
             this._state.x = Math.round(Math.random() * (50 - 1) + 1);
             this._state.y = Math.round(Math.random() * (50 - 1) + 1);
             this._callbackHunters.forEach(function (itemCallback) {
-                return itemCallback(_this.state);
+                return itemCallback(_this._state);
             });
         }
     }, {
@@ -9921,6 +9922,7 @@ var View = function (_React$Component) {
             return _react2.default.createElement(
                 "section",
                 null,
+                console.log(this.props.store.listHunters[0]),
                 _react2.default.createElement(
                     "div",
                     null,
@@ -10007,10 +10009,10 @@ var store = new _store2.default();
 var hunter1 = new _hunter2.default('Tom');
 var hunter2 = new _hunter2.default('Jack');
 
+store.listHunters = [hunter1, hunter2];
+
 store.subscribe(hunter1.receiveCoordinates());
 store.subscribe(hunter2.receiveCoordinates());
-
-store.listHunters = [hunter1, hunter2];
 
 _reactDom2.default.render(_react2.default.createElement(_view2.default, { store: store, hunterClass: _hunter2.default }), document.querySelector('#root'));
 
