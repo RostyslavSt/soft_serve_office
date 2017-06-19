@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let pairwiseConcatination = {
+            firstArray: [],
+            secondArray: [],
+            [Symbol.iterator]() {
+                let len = 0;
+                let i = 0;
+                (this.firstArray.length > this.secondArray.length) ? len = this.secondArray.length: len = this.firstArray
+                    .length;
+                return {
+                    next: () => {
+                        if (i < len) {
+                            return {
+                                done: false,
+                                value: [this.firstArray[i] + ' ' + this.secondArray[i]],
+                                increment: i++
+                            }
+                        } else {
+                            return {
+                                done: true
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
+
+        pairwiseConcatination.firstArray = ["Tom", "Sam", "Ray"];
+        pairwiseConcatination.secondArray = [22, 26, 24, 20];
+
+        for (let pair of pairwiseConcatination) {
+            console.log(pair);
+        }
+    </script>
+</body>
+
+</html>
