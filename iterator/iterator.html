@@ -16,14 +16,17 @@
             [Symbol.iterator]() {
                 let len = 0;
                 let i = 0;
-                (this.firstArray.length > this.secondArray.length) ? len = this.secondArray.length: len = this.firstArray
-                    .length;
+              
+                (this.firstArray.length > this.secondArray.length) ? len = this.secondArray.length: len = this.firstArray.length;
                 return {
                     next: () => {
                         if (i < len) {
+                            let arr = [];
+                            arr.push(this.firstArray[i]);
+                            arr.push(this.secondArray[i]);
                             return {
                                 done: false,
-                                value: [this.firstArray[i] + ' ' + this.secondArray[i]],
+                                value: arr,
                                 increment: i++
                             }
                         } else {
