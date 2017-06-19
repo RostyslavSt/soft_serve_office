@@ -15,19 +15,20 @@
             secondArray: [],
             [Symbol.iterator]() {
                 let len = 0;
-                let i = 0;
-              
-                (this.firstArray.length > this.secondArray.length) ? len = this.secondArray.length: len = this.firstArray.length;
+                let i = -1;
+
+                (this.firstArray.length > this.secondArray.length) ? len = this.secondArray.length: len = this.firstArray
+                    .length;
                 return {
                     next: () => {
-                        if (i < len) {
+                        if (i < len - 1) {
                             let arr = [];
+                            i++;
                             arr.push(this.firstArray[i]);
                             arr.push(this.secondArray[i]);
                             return {
                                 done: false,
-                                value: arr,
-                                increment: i++
+                                value: arr
                             }
                         } else {
                             return {
