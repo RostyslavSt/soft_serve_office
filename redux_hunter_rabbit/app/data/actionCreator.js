@@ -7,10 +7,9 @@ export default class ActionCreator {
             type: "changeCoord"
         });
     }
-    addHunter(hunter, name) {
+    addHunter(name) {
         this.store.dispatch({
             type: "addHunter",
-            hunter: hunter,
             name: name
         })
     }

@@ -1,13 +1,17 @@
 import React from "react";
+import Forest from "./components/forest/forest.jsx"
+import Hare from "./components/hare/hare.jsx"
+
+import Hunter from "./components/hunter/hunter.jsx"
 
 export default class View extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            x: 5,
-            y: 9,
+            x: this.props.store.getState().location.x,
+            y: this.props.store.getState().location.y,
             hunters: this.props.store.getState().hunters,
-            name: "NoName"
+            name: ""
         };
         this.move = this.move.bind(this);
         this.addNewHunter = this.addNewHunter.bind(this);
@@ -17,6 +21,7 @@ export default class View extends React.Component {
 
     componentDidMount() {
         this.unsubscribe = this.props.store.subscribe(this.storeChanged);
+        console.dir(this.props.store.getState());
     }
 
     componentWillUnmount() {
@@ -37,11 +42,9 @@ export default class View extends React.Component {
     }
 
     addNewHunter() {
-        this.props.actions.addHunter(this.props.hunter, this.state.name);
+        this.props.actions.addHunter(this.state.name);
         this.state.name = "";
-        console.dir(this.props.hunters);
     }
-
 
     onChange(event) {
         this.setState({
@@ -51,25 +54,37 @@ export default class View extends React.Component {
 
     render() {
         return (
-            <section>
-                <form>
-                    <label>
-                        Hunter's Name
-                        <input type="text" name="nameHunter" value={this.state.name} onChange={this.onChange} />
-                    </label>
-                </form>
+            <main>
+                <section className="field">
+                    <Forest>
+                        <Hare x={this.state.x} y={this.state.y}/>
+                    </Forest>
 
-                <div>
-                    {this.state.hunters.map((itemHunter, key) => {
-                        return <div key={key} className="hunter">
-                            {itemHunter.name} said:
-                                    <div>I see the hare: x: {this.state.x} y: {this.state.y}</div>
-                        </div>
-                    })}
-                </div>
-                <button onClick={this.move}>MOVE hare</button>
-                <button onClick={this.addNewHunter}>add hunter</button>
-            </section>
+                </section>
+
+                {/*<section>
+
+                </section>*/}
+
+                <section>
+                    <div className="hunters-block">
+                        {this.state.hunters.map((itemHunter, key) => {
+                            return <Hunter key={key} name={itemHunter.name} x={this.state.x} y={this.state.y} />
+                        })}
+                    </div>
+                </section>
+
+                <section>
+                    <form>
+                        <label>
+                            Hunter's Name
+                        <input type="text" name="nameHunter" value={this.state.name} onChange={this.onChange} />
+                        </label>
+                    </form>
+                    <button onClick={this.move}>MOVE hare</button>
+                    <button onClick={this.addNewHunter}>add hunter</button>
+                </section>
+            </main>
 
 
         );

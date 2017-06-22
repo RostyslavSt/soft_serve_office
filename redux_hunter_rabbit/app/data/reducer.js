@@ -1,34 +1,38 @@
+import Hare from "./hare.js";
 import Hunter from "./hunter.js";
 
+let hare = new Hare(3, 4);
 let hunter1 = new Hunter('Tom', 57);
 let hunter2 = new Hunter('Jack', 19);
-let hunter3 = new Hunter('Mike', 45);
-// let listHunters = [hunter1, hunter2, hunter3];
+
+let listHunters = [hunter1, hunter2];
 
 let initialState = {
     location: {
-        x: 10,
-        y: 20
+        x: hare.x,
+        y: hare.y
     },
-    hunters: [hunter1, hunter2, hunter3]
+    hunters: listHunters
 }
+
+
 export default function Reducer(state = initialState, action) {
     switch (action.type) {
         case "changeCoord":
             return Object.assign({}, state, {
                 location: {
-                    x: Math.round(Math.random() * (50 - 1) + 1),
-                    y: Math.round(Math.random() * (50 - 1) + 1)
+                    x: Math.round(Math.random() * (600 - 1) + 1),
+                    y: Math.round(Math.random() * (600 - 1) + 1)
                 }
             })
 
         case "addHunter":
-        // let newHun
+            let newHunter = new Hunter(action.name);
+            state.hunters.push(newHunter);
+            console.log(action.name);
+
             return Object.assign({}, state, {
-                hunters: [{
-                    name: "John",
-                    age: 22
-                }]
+                hunters: state.hunters
             })
 
         default:
