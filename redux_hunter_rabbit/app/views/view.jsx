@@ -62,10 +62,6 @@ export default class View extends React.Component {
 
                 </section>
 
-                {/*<section>
-
-                </section>*/}
-
                 <section>
                     <div className="hunters-block">
                         {this.state.hunters.map((itemHunter, key) => {

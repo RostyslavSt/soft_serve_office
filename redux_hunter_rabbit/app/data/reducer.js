@@ -21,8 +21,8 @@ export default function Reducer(state = initialState, action) {
         case "changeCoord":
             return Object.assign({}, state, {
                 location: {
-                    x: Math.round(Math.random() * (600 - 1) + 1),
-                    y: Math.round(Math.random() * (600 - 1) + 1)
+                    x: Math.round(Math.random() * (500 - 1) + 1),
+                    y: Math.round(Math.random() * (1000 - 1) + 1)
                 }
             })
 

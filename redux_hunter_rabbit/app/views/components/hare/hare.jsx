@@ -7,7 +7,7 @@ export default class Rabbit extends React.Component {
 
     render() {
         return (
-            <div className="hare" style={{width: 300}}>
+            <div className="hare" style={{top: this.props.x, left: this.props.y}}>
                 <div className="hare-img">
 
                 </div>
