@@ -1,6 +1,6 @@
 export default class Hare {
     constructor(x, y) {
         this.x = x || 5,
-        this.y = 7 || 7
+        this.y = y || 7
     }
 }

@@ -1,5 +1,5 @@
-import Hare from "./hare.js";
-import Hunter from "./hunter.js";
+import Hare from "../data/hare.js";
+import Hunter from "../data/hunter.js";
 
 let hare = new Hare(3, 4);
 let hunter1 = new Hunter('Tom', 57);

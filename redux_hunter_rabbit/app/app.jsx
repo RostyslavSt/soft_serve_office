@@ -1,18 +1,36 @@
-import Hunter from "./data/hunter.js";
-
-import ActionCreator from "./data/actionCreator";
-import Reducer from "./data/reducer.js"
-import {createStore} from "redux";
+import ActionCreator from "./actions/actionCreator";
+import Reducer from "./reducers/reducer.js"
+import { createStore } from "redux";
 import View from "./views/view.jsx";
+import Navigation from "./views/components/navigation/navigation.jsx";
+import FormAddHunter from "./views/components/forms/formHunter.jsx";
+
 
 import React from "react";
 import ReactDOM from "react-dom";
+import {
+    BrowserRouter as Router,
+    Route,
+    Link
+} from 'react-router-dom';
+import createHistory from "history/createBrowserHistory";
 
 
 const store = createStore(Reducer);
 const actions = new ActionCreator(store);
 
 ReactDOM.render(
-   <View store={store} actions={actions}/>,
-   document.querySelector(".root")
+    <Router history={createHistory()}>
+        <div>
+            <Navigation />
+            <Route exact path="/" render={(props) => {
+                return <View {...props} actions={actions} store={store} />
+            }} />
+            <Route path="/form" component={FormAddHunter} />
+
+        </div>
+    </Router>,
+    document.querySelector(".root")
 );
+
+{/*<View store={store} actions={actions} />*/ }

@@ -7,9 +7,14 @@ export default class Hunter extends React.Component {
 
     render() {
         return (
-            <div className="hunter">
-                {this.props.name} said:
-                    <div>I see the hare: x: {this.props.x} y: {this.props.y}</div>
+            <div className="hunter-item-container">
+                <figure>
+                    <div className="hunter-img"></div>
+                    <figurecaption>
+                        {this.props.name} said:
+                        <div>I see the hare: x: {this.props.x} y: {this.props.y}</div>
+                    </figurecaption>
+                </figure>
             </div>
         )
     }

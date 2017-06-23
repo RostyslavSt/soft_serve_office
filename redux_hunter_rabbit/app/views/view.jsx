@@ -1,8 +1,9 @@
 import React from "react";
-import Forest from "./components/forest/forest.jsx"
-import Hare from "./components/hare/hare.jsx"
+import Forest from "./components/forest/forest.jsx";
+import Hare from "./components/hare/hare.jsx";
+import Hunter from "./components/hunter/hunter.jsx";
+import Navigation from "./components/navigation/navigation.jsx"
 
-import Hunter from "./components/hunter/hunter.jsx"
 
 export default class View extends React.Component {
     constructor(props) {
@@ -21,7 +22,6 @@ export default class View extends React.Component {
 
     componentDidMount() {
         this.unsubscribe = this.props.store.subscribe(this.storeChanged);
-        console.dir(this.props.store.getState());
     }
 
     componentWillUnmount() {
@@ -55,13 +55,15 @@ export default class View extends React.Component {
     render() {
         return (
             <main>
+                {/*field with rabbit*/}
                 <section className="field">
                     <Forest>
-                        <Hare x={this.state.x} y={this.state.y}/>
+                        <Hare x={this.state.x} y={this.state.y} move={this.move} />
                     </Forest>
 
                 </section>
 
+                {/*section with hunters*/}
                 <section>
                     <div className="hunters-block">
                         {this.state.hunters.map((itemHunter, key) => {
@@ -81,7 +83,6 @@ export default class View extends React.Component {
                     <button onClick={this.addNewHunter}>add hunter</button>
                 </section>
             </main>
-
 
         );
     }
