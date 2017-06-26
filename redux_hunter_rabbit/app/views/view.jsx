@@ -63,6 +63,12 @@ export default class View extends React.Component {
 
                 </section>
 
+                <section >
+                    <div className="move-button" >
+                        <button onClick={this.move}>MOVE hare</button>
+                    </div>
+                </section>
+
                 {/*section with hunters*/}
                 <section>
                     <div className="hunters-block">
@@ -72,6 +78,7 @@ export default class View extends React.Component {
                     </div>
                 </section>
 
+
                 <section>
                     <form>
                         <label>
@@ -79,7 +86,7 @@ export default class View extends React.Component {
                         <input type="text" name="nameHunter" value={this.state.name} onChange={this.onChange} />
                         </label>
                     </form>
-                    <button onClick={this.move}>MOVE hare</button>
+                   
                     <button onClick={this.addNewHunter}>add hunter</button>
                 </section>
             </main>

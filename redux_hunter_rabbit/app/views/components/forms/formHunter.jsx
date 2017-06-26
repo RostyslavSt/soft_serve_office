@@ -1,12 +1,13 @@
 import React from "react";
 import Hunter from "../hunter/hunter.jsx";
+import RealHunter from "../hunter/real_hunter.jsx"
 
 export default class FormAddHunter extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             hunters: this.props.store.getState().hunters,
-            name: ""
+            name2: ""
         }
         this.addNewHunter = this.addNewHunter.bind(this);
         this.storeChanged = this.storeChanged.bind(this);
@@ -30,7 +31,7 @@ export default class FormAddHunter extends React.Component {
 
     addNewHunter() {
         this.props.actions.addHunter(this.state.name);
-        this.state.name = "";
+        this.state.name2 = "";
     }
 
     onChange(event) {
@@ -41,18 +42,18 @@ export default class FormAddHunter extends React.Component {
 
     render() {
         return (
-            <section className="hunter-add-form">
-                <form>
-                    <label>
+            <section className="hunter-add-section">
+                <form className="hunter-add-form">
+                    <label className="form-input">
                         Hunter's Name
                         <input type="text" name="nameHunter" value={this.props.name} onChange={this.onChange} />
                     </label>
+                     <button onClick={this.addNewHunter}>add hunter</button>
                 </form>
-                <button onClick={this.addNewHunter}>add hunter</button>
-
+               
                 <div className="hunters-block">
                     {this.state.hunters.map((itemHunter, key) => {
-                        return <Hunter key={key} name={itemHunter.name} />
+                        return <RealHunter key={key} name={itemHunter.name} path={this.props.store.getState().hunterLogoPath[key]}/>
                     })}
                 </div>
 

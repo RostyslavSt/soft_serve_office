@@ -12186,6 +12186,8 @@ var _hunter = __webpack_require__(112);
 
 var _hunter2 = _interopRequireDefault(_hunter);
 
+var _hunterLogoPath = __webpack_require__(257);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var hare = new _hare2.default(3, 4);
@@ -12199,7 +12201,8 @@ var initialState = {
         x: hare.x,
         y: hare.y
     },
-    hunters: listHunters
+    hunters: listHunters,
+    hunterLogoPath: _hunterLogoPath.listHunterLogoPath
 };
 
 function Reducer() {
@@ -12210,8 +12213,8 @@ function Reducer() {
         case "changeCoord":
             return Object.assign({}, state, {
                 location: {
-                    x: Math.round(Math.random() * (500 - 1) + 1),
-                    y: Math.round(Math.random() * (1000 - 1) + 1)
+                    x: Math.round(Math.random() * (1000 - 1) + 1),
+                    y: Math.round(Math.random() * (500 - 1) + 1)
                 }
             });
 
@@ -12250,6 +12253,10 @@ var _hunter = __webpack_require__(115);
 
 var _hunter2 = _interopRequireDefault(_hunter);
 
+var _real_hunter = __webpack_require__(256);
+
+var _real_hunter2 = _interopRequireDefault(_real_hunter);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -12268,7 +12275,7 @@ var FormAddHunter = function (_React$Component) {
 
         _this.state = {
             hunters: _this.props.store.getState().hunters,
-            name: ""
+            name2: ""
         };
         _this.addNewHunter = _this.addNewHunter.bind(_this);
         _this.storeChanged = _this.storeChanged.bind(_this);
@@ -12298,7 +12305,7 @@ var FormAddHunter = function (_React$Component) {
         key: "addNewHunter",
         value: function addNewHunter() {
             this.props.actions.addHunter(this.state.name);
-            this.state.name = "";
+            this.state.name2 = "";
         }
     }, {
         key: "onChange",
@@ -12310,29 +12317,31 @@ var FormAddHunter = function (_React$Component) {
     }, {
         key: "render",
         value: function render() {
+            var _this2 = this;
+
             return _react2.default.createElement(
                 "section",
-                { className: "hunter-add-form" },
+                { className: "hunter-add-section" },
                 _react2.default.createElement(
                     "form",
-                    null,
+                    { className: "hunter-add-form" },
                     _react2.default.createElement(
                         "label",
-                        null,
+                        { className: "form-input" },
                         "Hunter's Name",
                         _react2.default.createElement("input", { type: "text", name: "nameHunter", value: this.props.name, onChange: this.onChange })
+                    ),
+                    _react2.default.createElement(
+                        "button",
+                        { onClick: this.addNewHunter },
+                        "add hunter"
                     )
-                ),
-                _react2.default.createElement(
-                    "button",
-                    { onClick: this.addNewHunter },
-                    "add hunter"
                 ),
                 _react2.default.createElement(
                     "div",
                     { className: "hunters-block" },
                     this.state.hunters.map(function (itemHunter, key) {
-                        return _react2.default.createElement(_hunter2.default, { key: key, name: itemHunter.name });
+                        return _react2.default.createElement(_real_hunter2.default, { key: key, name: itemHunter.name, path: _this2.props.store.getState().hunterLogoPath[key] });
                     })
                 )
             );
@@ -12466,6 +12475,19 @@ var View = function (_React$Component) {
                     null,
                     _react2.default.createElement(
                         "div",
+                        { className: "move-button" },
+                        _react2.default.createElement(
+                            "button",
+                            { onClick: this.move },
+                            "MOVE hare"
+                        )
+                    )
+                ),
+                _react2.default.createElement(
+                    "section",
+                    null,
+                    _react2.default.createElement(
+                        "div",
                         { className: "hunters-block" },
                         this.state.hunters.map(function (itemHunter, key) {
                             return _react2.default.createElement(_hunter2.default, { key: key, name: itemHunter.name, x: _this2.state.x, y: _this2.state.y });
@@ -12484,11 +12506,6 @@ var View = function (_React$Component) {
                             "Hunter's Name",
                             _react2.default.createElement("input", { type: "text", name: "nameHunter", value: this.state.name, onChange: this.onChange })
                         )
-                    ),
-                    _react2.default.createElement(
-                        "button",
-                        { onClick: this.move },
-                        "MOVE hare"
                     ),
                     _react2.default.createElement(
                         "button",
@@ -12752,7 +12769,7 @@ var Hare = function (_React$Component) {
         value: function render() {
             return _react2.default.createElement(
                 "div",
-                { className: "hare", style: { top: this.props.x, left: this.props.y }, onClick: this.props.move },
+                { className: "hare", style: { left: this.props.x, top: this.props.y }, onClick: this.props.move },
                 _react2.default.createElement("div", { className: "hare-img" })
             );
         }
@@ -27525,6 +27542,77 @@ module.exports = function(module) {
 	return module;
 };
 
+
+/***/ }),
+/* 256 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(6);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var RealHunter = function (_React$Component) {
+    _inherits(RealHunter, _React$Component);
+
+    function RealHunter(props) {
+        _classCallCheck(this, RealHunter);
+
+        return _possibleConstructorReturn(this, (RealHunter.__proto__ || Object.getPrototypeOf(RealHunter)).call(this, props));
+    }
+
+    _createClass(RealHunter, [{
+        key: "render",
+        value: function render() {
+            var path = { backgroundImage: "url(" + this.props.path + ")" };
+            return _react2.default.createElement(
+                "figure",
+                { className: "title-name" },
+                _react2.default.createElement("div", { className: "real-hunter-img", style: path }),
+                _react2.default.createElement(
+                    "figurecaption",
+                    null,
+                    "Name: ",
+                    this.props.name
+                )
+            );
+        }
+    }]);
+
+    return RealHunter;
+}(_react2.default.Component);
+
+exports.default = RealHunter;
+
+/***/ }),
+/* 257 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var listHunterLogoPath = ['./app/img/hunt2.jpg', './app/img/hunt3.jpg', './app/img/hunt4.jpg', './app/img/hunt5.jpg', './app/img/hunt6.jpg', './app/img/hunt7.jpg', './app/img/hunt8.jpg'];
+
+exports.listHunterLogoPath = listHunterLogoPath;
 
 /***/ })
 /******/ ]);
