@@ -26,7 +26,9 @@ ReactDOM.render(
             <Route exact path="/" render={(props) => {
                 return <View {...props} actions={actions} store={store} />
             }} />
-            <Route path="/form" component={FormAddHunter} />
+            <Route path="/form" render={(props) => {
+                return <FormAddHunter {...props} actions={actions} store={store}/>
+            }} />
 
         </div>
     </Router>,
@@ -34,3 +36,4 @@ ReactDOM.render(
 );
 
 {/*<View store={store} actions={actions} />*/ }
+// component={FormAddHunter}

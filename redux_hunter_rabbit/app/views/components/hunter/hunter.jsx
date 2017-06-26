@@ -12,7 +12,11 @@ export default class Hunter extends React.Component {
                     <div className="hunter-img"></div>
                     <figurecaption>
                         {this.props.name} said:
-                        <div>I see the hare: x: {this.props.x} y: {this.props.y}</div>
+                        <div>I see the hare:</div>
+                        <div className="hunter-watch">
+                        <div>x: {this.props.x}</div>
+                        <div>y: {this.props.y}</div>
+                        </div>
                     </figurecaption>
                 </figure>
             </div>

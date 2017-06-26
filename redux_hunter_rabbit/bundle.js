@@ -12246,6 +12246,10 @@ var _react = __webpack_require__(6);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _hunter = __webpack_require__(115);
+
+var _hunter2 = _interopRequireDefault(_hunter);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -12254,31 +12258,61 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-// import 
-
-
 var FormAddHunter = function (_React$Component) {
     _inherits(FormAddHunter, _React$Component);
 
     function FormAddHunter(props) {
         _classCallCheck(this, FormAddHunter);
 
-        return _possibleConstructorReturn(this, (FormAddHunter.__proto__ || Object.getPrototypeOf(FormAddHunter)).call(this, props));
-        // this.state = {
-        //     hunters: this.props.store.getState().hunters,
-        //     name: ""
-        // }
-        // this.addNewHunter = this.addNewHunter.bind(this);
-        // this.storeChanged = this.storeChanged.bind(this);
-        // this.onChange = this.onChange.bind(this);
+        var _this = _possibleConstructorReturn(this, (FormAddHunter.__proto__ || Object.getPrototypeOf(FormAddHunter)).call(this, props));
+
+        _this.state = {
+            hunters: _this.props.store.getState().hunters,
+            name: ""
+        };
+        _this.addNewHunter = _this.addNewHunter.bind(_this);
+        _this.storeChanged = _this.storeChanged.bind(_this);
+        _this.onChange = _this.onChange.bind(_this);
+        return _this;
     }
 
     _createClass(FormAddHunter, [{
+        key: "componentDidMount",
+        value: function componentDidMount() {
+            this.unsubscribe = this.props.store.subscribe(this.storeChanged);
+        }
+    }, {
+        key: "componentWillUnmount",
+        value: function componentWillUnmount() {
+            this.unsubscribe();
+        }
+    }, {
+        key: "storeChanged",
+        value: function storeChanged() {
+            console.log(this.props.store.getState());
+            this.setState({
+                hunters: this.props.store.getState().hunters
+            });
+        }
+    }, {
+        key: "addNewHunter",
+        value: function addNewHunter() {
+            this.props.actions.addHunter(this.state.name);
+            this.state.name = "";
+        }
+    }, {
+        key: "onChange",
+        value: function onChange(event) {
+            this.setState({
+                name: event.target.value
+            });
+        }
+    }, {
         key: "render",
         value: function render() {
             return _react2.default.createElement(
                 "section",
-                null,
+                { className: "hunter-add-form" },
                 _react2.default.createElement(
                     "form",
                     null,
@@ -12293,6 +12327,13 @@ var FormAddHunter = function (_React$Component) {
                     "button",
                     { onClick: this.addNewHunter },
                     "add hunter"
+                ),
+                _react2.default.createElement(
+                    "div",
+                    { className: "hunters-block" },
+                    this.state.hunters.map(function (itemHunter, key) {
+                        return _react2.default.createElement(_hunter2.default, { key: key, name: itemHunter.name });
+                    })
                 )
             );
         }
@@ -12571,11 +12612,14 @@ _reactDom2.default.render(_react2.default.createElement(
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: "/", render: function render(props) {
                 return _react2.default.createElement(_view2.default, _extends({}, props, { actions: actions, store: store }));
             } }),
-        _react2.default.createElement(_reactRouterDom.Route, { path: "/form", component: _formHunter2.default })
+        _react2.default.createElement(_reactRouterDom.Route, { path: "/form", render: function render(props) {
+                return _react2.default.createElement(_formHunter2.default, _extends({}, props, { actions: actions, store: store }));
+            } })
     )
 ), document.querySelector(".root"));
 
-{/*<View store={store} actions={actions} />*/}
+{} /*<View store={store} actions={actions} />*/
+// component={FormAddHunter}
 
 /***/ }),
 /* 111 */
@@ -12771,10 +12815,23 @@ var Hunter = function (_React$Component) {
                         _react2.default.createElement(
                             "div",
                             null,
-                            "I see the hare: x: ",
-                            this.props.x,
-                            " y: ",
-                            this.props.y
+                            "I see the hare:"
+                        ),
+                        _react2.default.createElement(
+                            "div",
+                            { className: "hunter-watch" },
+                            _react2.default.createElement(
+                                "div",
+                                null,
+                                "x: ",
+                                this.props.x
+                            ),
+                            _react2.default.createElement(
+                                "div",
+                                null,
+                                "y: ",
+                                this.props.y
+                            )
                         )
                     )
                 )
