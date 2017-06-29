@@ -12854,17 +12854,15 @@ var FormAddHunter = function (_React$Component) {
         return _this;
     }
 
+    // componentDidMount() {
+    //     this.unsubscribe = this.props.store.subscribe(this.storeChanged);
+    // }
+
+    // componentWillUnmount() {
+    //     this.unsubscribe();
+    // }
+
     _createClass(FormAddHunter, [{
-        key: "componentDidMount",
-        value: function componentDidMount() {
-            this.unsubscribe = this.props.store.subscribe(this.storeChanged);
-        }
-    }, {
-        key: "componentWillUnmount",
-        value: function componentWillUnmount() {
-            this.unsubscribe();
-        }
-    }, {
         key: "storeChanged",
         value: function storeChanged() {
             console.log(this.props.store);
@@ -12973,20 +12971,20 @@ var _hunterLogoPath = __webpack_require__(124);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var hare = new _hare2.default(3, 4);
-var hunter1 = new _hunter2.default('Tom', 57);
-var hunter2 = new _hunter2.default('Jack', 19);
+// let hare = new Hare(3, 4);
+// let hunter1 = new Hunter('Tom', 57);
+// let hunter2 = new Hunter('Jack', 19);
 
-var listHunters = [hunter1, hunter2];
+// let listHunters = [hunter1, hunter2];
 
-var initialState = {
-    location: {
-        x: hare.x,
-        y: hare.y
-    },
-    hunters: listHunters,
-    hunterLogoPath: _hunterLogoPath.listHunterLogoPath
-};
+// let initialState = {
+//     location: {
+//         x: hare.x,
+//         y: hare.y
+//     },
+//     hunters: listHunters,
+//     hunterLogoPath: listHunterLogoPath
+// }
 
 function Reducer() {
     var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
@@ -13509,6 +13507,16 @@ var _formHunter2 = _interopRequireDefault(_formHunter);
 
 var _reactRedux = __webpack_require__(38);
 
+var _hare = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../data/hare.js\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+
+var _hare2 = _interopRequireDefault(_hare);
+
+var _hunter = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../data/hunter.js\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+
+var _hunter2 = _interopRequireDefault(_hunter);
+
+var _hunterLogoPath = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../data/hunterLogoPath.js\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+
 var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
@@ -13525,8 +13533,22 @@ var _createBrowserHistory2 = _interopRequireDefault(_createBrowserHistory);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var store = (0, _redux.createStore)(_reducer2.default);
-// console.log(store.subscribe);
+var hare = new _hare2.default(3, 4);
+var hunter1 = new _hunter2.default('Tom', 57);
+var hunter2 = new _hunter2.default('Jack', 19);
+
+var listHunters = [hunter1, hunter2];
+
+var initialState = {
+    location: {
+        x: hare.x,
+        y: hare.y
+    },
+    hunters: listHunters,
+    hunterLogoPath: _hunterLogoPath.listHunterLogoPath
+};
+
+var store = (0, _redux.createStore)(_reducer2.default, initialState);
 var actions = new _actionCreator2.default(store);
 
 _reactDom2.default.render(_react2.default.createElement(

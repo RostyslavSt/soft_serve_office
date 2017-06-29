@@ -4,20 +4,20 @@ import {
     listHunterLogoPath
 } from "../data/hunterLogoPath.js"
 
-let hare = new Hare(3, 4);
-let hunter1 = new Hunter('Tom', 57);
-let hunter2 = new Hunter('Jack', 19);
+// let hare = new Hare(3, 4);
+// let hunter1 = new Hunter('Tom', 57);
+// let hunter2 = new Hunter('Jack', 19);
 
-let listHunters = [hunter1, hunter2];
+// let listHunters = [hunter1, hunter2];
 
-let initialState = {
-    location: {
-        x: hare.x,
-        y: hare.y
-    },
-    hunters: listHunters,
-    hunterLogoPath: listHunterLogoPath
-}
+// let initialState = {
+//     location: {
+//         x: hare.x,
+//         y: hare.y
+//     },
+//     hunters: listHunters,
+//     hunterLogoPath: listHunterLogoPath
+// }
 
 export default function Reducer(state = initialState, action) {
     switch (action.type) {

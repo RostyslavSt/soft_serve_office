@@ -12,13 +12,13 @@ class FormAddHunter extends React.Component {
         this.storeChanged = this.storeChanged.bind(this);
     }
 
-    componentDidMount() {
-        this.unsubscribe = this.props.store.subscribe(this.storeChanged);
-    }
+    // componentDidMount() {
+    //     this.unsubscribe = this.props.store.subscribe(this.storeChanged);
+    // }
 
-    componentWillUnmount() {
-        this.unsubscribe();
-    }
+    // componentWillUnmount() {
+    //     this.unsubscribe();
+    // }
 
     storeChanged() {
         console.log(this.props.store);
